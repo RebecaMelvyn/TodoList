@@ -12,6 +12,8 @@ class Todo
         string $title,
         string $description
     ) {
+        $this->title = $title;
+        $this->description = $description;
     }
 
     public function setCompleted(): self
@@ -63,21 +65,21 @@ class TodoList
         return array_filter($this->todos, $filterFunction);
     }
 
-    public function searchedTodos(): array
-    {
-        return $this->filter(fn (Todo $todo) => !$todo->isCompleted());
-    }
-
     function addTodo(Todo $todo): self
     {
         $this->todos[] = $todo;
         return $this;
     }
+
+    public function searchedTodos(string $title): array
+    {
+        return $this->filter(fn (Todo $todo) => str_contains($todo->title, $title));
+    }
 }
 
 $todo2 = new Todo(
-    $title = 'Ma todolist',
-    $description = 'Ma descr'
+    $title = 'Ma todolist \n',
+    $description = 'Ma descr\n'
 );
 
 fn (Todo $todo) => $todo->isCompleted();
@@ -85,18 +87,16 @@ fn (Todo $todo) => $todo->isCompleted();
 $todos[] = $todo2;
 
 
-var_dump($todo->isCompleted());
+#var_dump($todo->isCompleted());
 
 $toDoList = new TodoList();
 
 $result = $toDoList
     ->addTodo($todo2)
-    ->addTodo(new Todo($title = 'Test1', $description = "descripiton1"))
+    ->addTodo(new Todo($title = 'Todo1', $description = "descripiton1"))
     ->setAllCompleted()
     ->addTodo(new Todo($title = 'Test2', $description = "description2"))
-    ->showNotCompleted();
+    ->searchedTodos('Tes');
 
-
-var_dump($toDoList);
 
 var_dump($result);
