@@ -27,6 +27,7 @@ class TodoList
         return array_filter($this->todos, $filterFunction);
     }
 
+
     function addTodo(Todo $todo): self
     {
         $this->todos[] = $todo;
