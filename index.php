@@ -1,6 +1,6 @@
 <?php
-require('todo.php');
-require('todoList.php');
+require('Todo.php');
+require('Todolist.php');
 
 echo "My ToDo List";
 
