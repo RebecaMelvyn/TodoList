@@ -19,6 +19,7 @@ class Todo
         return $this;
     }
 
+
     public function isCompleted(): bool
     {
         return $this->completed_at !== null;
